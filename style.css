@@ -48,3 +48,36 @@ textarea{min-height:200px}canvas{max-width:100%;height:auto;border-radius:10px;m
 .res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.res div{background:#faf8ff;border-radius:12px;padding:12px;font-size:.85rem;color:var(--mute)}.res b{display:block;font-size:1.3rem;color:var(--acc)}
 #out{display:block;margin-top:12px}.note{font-size:.85rem;color:var(--mute)}
 @media(max-width:380px){.grid{grid-template-columns:1fr}}
+
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+body{background:linear-gradient(120deg,#4338ca,#7c3aed,#ec4899,#f97316,#7c3aed,#4338ca);background-size:300% 300%;animation:flow 18s ease infinite}
+body::before,body::after{content:"";position:fixed;border-radius:50%;filter:blur(40px);opacity:.35;pointer-events:none;z-index:0;animation:float 7s ease-in-out infinite}
+body::before{width:220px;height:220px;background:#22d3ee;top:8%;left:-70px}
+body::after{width:260px;height:260px;background:#fde047;bottom:6%;right:-90px;animation-delay:-3s}
+header,main,footer{position:relative;z-index:1}
+h1{animation:rise .6s both}.panel{animation:rise .6s .1s both}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 22px}
+.badges span{background:rgba(255,255,255,.22);color:#fff;padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:600}
+.tile{border-bottom:5px solid var(--c);transition:transform .2s,box-shadow .2s;animation:pop .5s both}
+.tile:nth-child(1){animation-delay:0.05s}.tile:nth-child(2){animation-delay:0.10s}.tile:nth-child(3){animation-delay:0.15s}.tile:nth-child(4){animation-delay:0.20s}.tile:nth-child(5){animation-delay:0.25s}.tile:nth-child(6){animation-delay:0.30s}.tile:nth-child(7){animation-delay:0.35s}.tile:nth-child(8){animation-delay:0.40s}.tile:nth-child(9){animation-delay:0.45s}
+.tile:hover,.tile:focus-visible{transform:translateY(-6px) rotate(-1deg);box-shadow:0 16px 34px rgba(40,20,120,.4)}
+.tile:active{transform:scale(.97)}
+.tile i{width:54px;height:54px;display:grid;place-items:center;border-radius:16px;background:var(--c);font-size:1.7rem;margin-bottom:10px;transition:transform .3s;box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.tile:hover i{transform:rotate(-12deg) scale(1.12)}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px;text-align:center;color:#fff}
+.how div{background:rgba(255,255,255,.18);border-radius:14px;padding:12px 6px;font-size:.85rem;animation:rise .6s .5s both}.how b{display:block;font-size:.95rem}
+.btn{transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-2px) scale(1.03)}.btn:active{transform:scale(.96)}
+.drop{transition:transform .2s,background .2s,border-color .2s}.drop:hover{transform:scale(1.015)}
+ul.list li{animation:rise .35s both}.res div{animation:pop .4s both}
+details{transition:transform .2s}details:hover{transform:translateX(3px)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* App-icon grid: 3 columns */
+.grid,.grid{grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{padding:14px 6px 12px;text-align:center;border-bottom-width:4px;border-radius:18px}
+.tile i{margin:0 auto 8px;width:58px;height:58px;font-size:1.9rem;border-radius:18px}
+.tile b{font-size:.78rem;line-height:1.25}
+.tile span{display:none}
+@media(max-width:380px){.grid{grid-template-columns:repeat(3,1fr);gap:8px}.tile i{width:50px;height:50px;font-size:1.6rem}}
