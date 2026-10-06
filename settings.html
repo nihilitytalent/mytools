@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Settings – Image & PDF Tools</title><meta name="description" content="App settings."><link rel="stylesheet" href="style.css"><meta name="theme-color" content="#101113"></head><body><style>.set{background:#1e2023;border-radius:20px;padding:6px 8px;margin-bottom:14px}.sr{display:flex;align-items:center;gap:14px;padding:16px 12px;color:var(--ink);text-decoration:none;background:none;border:0;width:100%;font:inherit;text-align:left;cursor:pointer}.sr i{font-style:normal;font-size:1.4rem;width:30px;text-align:center}.sr b{flex:1;font-weight:600}.sr small{display:block;color:var(--mute);font-weight:400;font-size:.8rem}.sr em{color:var(--mute);font-style:normal}.sw{position:relative;width:52px;height:30px;flex:none}.sw input{opacity:0;width:100%;height:100%;position:absolute;margin:0;z-index:1;cursor:pointer}.sw s{position:absolute;inset:0;background:#3a3d42;border-radius:99px;transition:.2s}.sw s::after{content:"";position:absolute;width:24px;height:24px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s}.sw input:checked+s{background:#00b894}.sw input:checked+s::after{left:25px}.ver{text-align:center;color:var(--mute);margin:22px 0}</style>
+<header><a class="back" href="index.html">← Settings</a></header><main>
+<div class="set"><a class="sr" href="mailto:neesonstha891@gmail.com?subject=Feedback"><i>💬</i><b>Feedback or suggestion</b></a><a class="sr" href="mailto:neesonstha891@gmail.com?subject=Feature%20request"><i>✅</i><b>Request more features</b></a></div>
+<div class="set"><label class="sr"><i>📷</i><b>Start with camera<small>Open the installed app straight into the scanner</small></b><span class="sw"><input type="checkbox" id="cam"><s></s></span></label><button class="sr" id="clr"><i>🧹</i><b>Clear recently used</b><em id="cm"></em></button><button class="sr" id="ins"><i>📲</i><b>Install app</b></button></div>
+<div class="set"><button class="sr" id="shr"><i>🔗</i><b>Share with friends</b><em id="sm"></em></button></div>
+<div class="set"><a class="sr" href="privacy.html"><i>🛡️</i><b>Privacy policy</b></a><a class="sr" href="terms.html"><i>📄</i><b>Terms of use</b></a><a class="sr" href="about.html"><i>ℹ️</i><b>About</b></a><a class="sr" href="contact.html"><i>✉️</i><b>Contact</b></a></div>
+<p class="ver">Version 1.0</p></main>
+<script>
+const $=id=>document.getElementById(id);
+try{$('cam').checked=localStorage.camStart==='1'}catch(e){}
+$('cam').onchange=()=>{try{localStorage.camStart=$('cam').checked?'1':'0'}catch(e){}};
+$('clr').onclick=()=>{try{localStorage.removeItem('recent')}catch(e){}$('cm').textContent='Cleared ✓'};
+$('shr').onclick=async()=>{const u=new URL('./',location.href).href;try{if(navigator.share)await navigator.share({title:'Free Image & PDF Tools',text:'Free private PDF and image tools',url:u});else{await navigator.clipboard.writeText(u);$('sm').textContent='Link copied ✓'}}catch(e){}};
+let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e});
+$('ins').onclick=async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null}else alert('To install: open your browser menu and tap “Add to Home screen”.')};
+</script></body></html>
