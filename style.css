@@ -86,3 +86,4 @@ details{transition:transform .2s}details:hover{transform:translateX(3px)}
 .pg .th{height:150px;display:grid;place-items:center;overflow:hidden}
 .pg canvas{max-height:140px;width:auto;transition:transform .3s;margin:0}
 .pg.del{opacity:.35}.pg .btn.alt{padding:5px 10px;margin:2px}
+input[type=password]{font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}.opts .btn.alt{padding:9px 14px}
