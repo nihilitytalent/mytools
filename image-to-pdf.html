@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Image to PDF and Photo Scanner – Free & Private | Image & PDF Tools</title><meta name="description" content="Turn photos, scans or screenshots into one PDF. Take photos with your camera or pick from your gallery."><link rel="stylesheet" href="style.css"></head><body><header><a class="back" href="index.html">← All tools</a><h1>📸 Image to PDF and Photo Scanner</h1><p class="sub">Turn photos, scans or screenshots into one PDF. Take photos with your camera or pick from your gallery.</p></header><main><section class="panel"><div class="opts"><label>Page size<select id="size"><option value="a4">A4 page</option><option value="fit">Fit to image</option></select></label></div><label class="drop"><input type="file" id="f" accept="image/*" multiple><b>📸 Tap to add photos</b><br>Camera or gallery. Add several, then reorder.</label><ul class="list" id="list"></ul><p class="msg" id="msg"></p><button class="btn" id="go" disabled>Create PDF</button><div id="out"></div></section><div class="ad" aria-label="Advertisement">Ad space (paste your AdSense code here)</div><h2>Questions</h2><details><summary>How do I scan a document with my phone?</summary><p>Tap add photos, choose the camera, take a clear photo in good light, then create the PDF. Add more pages the same way.</p></details><details><summary>Is it private?</summary><p>Yes. Your photos are processed on your device only.</p></details></main><footer><a href="index.html">Home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script src="common.js"></script><script>let files=[];
+$('f').onchange=e=>{files=files.concat([...e.target.files]);e.target.value='';$('out').innerHTML='';draw()};
+const draw=()=>{orderList($('list'),files,draw);$('go').disabled=!files.length};draw();
+$('go').onclick=async()=>{$('msg').textContent='';$('out').innerHTML='';$('go').disabled=true;$('go').textContent='Creating…';
+try{const doc=await PDFLib.PDFDocument.create(),a4=$('size').value==='a4';
+for(const f of files){let im;
+if(f.type==='image/png')im=await doc.embedPng(await f.arrayBuffer());
+else{const i=await loadImg(f),m=Math.min(1,2000/Math.max(i.naturalWidth,i.naturalHeight)),c=document.createElement('canvas');c.width=Math.round(i.naturalWidth*m);c.height=Math.round(i.naturalHeight*m);
+const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(i,0,0,c.width,c.height);
+im=await doc.embedJpg(await (await toBlob(c,'image/jpeg',.9)).arrayBuffer())}
+const W=im.width,H=im.height;
+if(a4){const s=Math.min(555/W,802/H),pg=doc.addPage([595,842]);pg.drawImage(im,{x:(595-W*s)/2,y:(842-H*s)/2,width:W*s,height:H*s})}
+else doc.addPage([W,H]).drawImage(im,{x:0,y:0,width:W,height:H})}
+const b=new Blob([await doc.save()],{type:'application/pdf'});$('out').appendChild(dlLink(b,'images.pdf','Download PDF ('+kb(b.size)+')'))}
+catch(e){$('msg').textContent='Could not create the PDF from one of the images.'}
+$('go').textContent='Create PDF';draw()};</script></body></html>
