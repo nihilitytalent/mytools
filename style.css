@@ -81,3 +81,8 @@ details{transition:transform .2s}details:hover{transform:translateX(3px)}
 .tile b{font-size:.78rem;line-height:1.25}
 .tile span{display:none}
 @media(max-width:380px){.grid{grid-template-columns:repeat(3,1fr);gap:8px}.tile i{width:50px;height:50px;font-size:1.6rem}}
+.pgs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.pg{background:#faf8ff;border-radius:12px;padding:8px;text-align:center;font-weight:600;font-size:.85rem}
+.pg .th{height:150px;display:grid;place-items:center;overflow:hidden}
+.pg canvas{max-height:140px;width:auto;transition:transform .3s;margin:0}
+.pg.del{opacity:.35}.pg .btn.alt{padding:5px 10px;margin:2px}

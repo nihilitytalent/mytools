@@ -21,3 +21,5 @@ x.drawImage(img,0,0,w,h);const b=await toBlob(c,t,$('q').value/100),p=Math.round
 r.s.innerHTML=kb(f.size)+' → '+kb(b.size)+(p>0?' <span class="save">−'+p+'%</span>':'');
 r.l.appendChild(dlLink(b,f.name.replace(/\.[^.]+$/,'')+'-new.'+EXT[t]))}
 catch(err){r.s.textContent='Could not read this file.'}}}}
+async function pdfjsLoad(buf){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';return pdfjsLib.getDocument({data:buf.slice(0)}).promise}
+async function pageCanvas(d,n,sc){const p=await d.getPage(n),v=p.getViewport({scale:sc}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;await p.render({canvasContext:c.getContext('2d'),viewport:v}).promise;return c}
