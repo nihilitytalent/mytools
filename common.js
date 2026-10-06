@@ -1,3 +1,4 @@
+try{document.documentElement.dataset.theme=localStorage.theme||"dark"}catch(e){document.documentElement.dataset.theme="dark"}
 const $=id=>document.getElementById(id);
 const kb=n=>n>1048576?(n/1048576).toFixed(2)+' MB':Math.max(1,Math.round(n/1024))+' KB';
 function li(ul,name){const l=document.createElement('li'),n=document.createElement('span'),s=document.createElement('span');n.className='nm';n.textContent=name;s.className='sz';l.append(n,s);ul.appendChild(l);return{l,s}}
