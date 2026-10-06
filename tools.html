@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>All Tools – Image & PDF Tools</title><meta name="description" content="Every free image, PDF and office tool in one place."><link rel="stylesheet" href="style.css"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><script>try{document.documentElement.dataset.theme=localStorage.theme||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script></head><body class="app">
+<div class="t2"><h1>Tools</h1><button class="tbtn" onclick="toggleTheme()" aria-label="Switch dark or light theme">🌓</button></div>
+<div class="tabs2" id="tb"></div><div id="tl"></div><footer><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a></footer><nav class="bn"><a href="index.html">🏠<span>Home</span></a><a href="tools.html" class="on">🧰<span>Tools</span></a><button onclick="doInstall()" aria-label="Install app">📲<span>Install</span></button><a href="settings.html">⚙️<span>Settings</span></a></nav>
+<script src="tools.js"></script><script>
+const G=[['scan','Scan'],['import','Import'],['convert','Convert'],['edit','Edit'],['util','Utilities']],$=id=>document.getElementById(id);
+G.forEach(([k,n])=>{$('tb').insertAdjacentHTML('beforeend','<button data-k="'+k+'">'+n+'</button>');$('tl').insertAdjacentHTML('beforeend','<section class="tsec" id="s-'+k+'"><h2>'+n+'</h2><div class="icons">'+TOOLS.filter(t=>t[3]===k).map(t=>link(t)).join('')+'</div></section>')});
+function on(k){document.querySelectorAll('#tb button').forEach(b=>b.classList.toggle('on',b.dataset.k===k))}
+document.querySelectorAll('#tb button').forEach(b=>b.onclick=()=>{on(b.dataset.k);$('s-'+b.dataset.k).scrollIntoView({behavior:'smooth'})});
+on((location.hash||'#scan').slice(1));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)on(e.target.id.slice(2))}),{rootMargin:'-80px 0px -70% 0px'});document.querySelectorAll('.tsec').forEach(s=>io.observe(s));
+</script></body></html>
