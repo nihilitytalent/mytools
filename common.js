@@ -25,3 +25,5 @@ catch(err){r.s.textContent='Could not read this file.'}}}}
 async function pdfjsLoad(buf){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';return pdfjsLib.getDocument({data:buf.slice(0)}).promise}
 async function pageCanvas(d,n,sc){const p=await d.getPage(n),v=p.getViewport({scale:sc}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;await p.render({canvasContext:c.getContext('2d'),viewport:v}).promise;return c}
 async function aesKey(pw,salt){const m=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+
+{const _c=HTMLAnchorElement.prototype.click;HTMLAnchorElement.prototype.click=function(){if(!this.isConnected){this.style.display='none';document.body.appendChild(this);_c.call(this);setTimeout(()=>this.remove(),1500)}else _c.call(this)}}
