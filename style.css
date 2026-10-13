@@ -77,3 +77,16 @@ header.bar2 h1{margin:0;font-size:1.1rem;white-space:nowrap;overflow:hidden;text
 .sht button{display:flex;align-items:center;gap:14px;width:100%;padding:17px 8px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;font-size:1.05rem;font-weight:600;text-align:left;cursor:pointer}
 .sht button:last-child{border:0;color:var(--mute);justify-content:center}
 @keyframes up{from{transform:translateY(100%)}}@keyframes pop{from{opacity:0;transform:scale(.9)}}
+/* ===== Polish pass 2 ===== */
+header.bar2{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 84%,transparent)}
+[data-theme=light] .panel{box-shadow:0 10px 30px rgba(20,30,60,.08)}
+.drop{background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--acc) 22%,transparent),transparent 72%),var(--field);border-color:color-mix(in srgb,var(--acc) 70%,transparent);transition:transform .2s,border-color .2s}
+.drop b{animation:fl 3.2s ease-in-out infinite}.drop.has b{animation:none}@keyframes fl{50%{transform:translateY(-5px)}}
+.drop.dz{transform:scale(1.02);border-style:solid}
+.trust{display:inline-flex;gap:6px;align-items:center;font-size:.8rem;font-weight:600;color:var(--at);background:color-mix(in srgb,var(--acc) 14%,transparent);padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.strip{display:flex;gap:8px;flex-basis:100%;overflow-x:auto;padding:8px 0 2px}
+.strip img,.strip span{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none;background:var(--ring);display:grid;place-items:center;font-size:1.5rem}
+#pb{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;overflow:hidden;display:none}#pb.on{display:block}#pb i{display:block;height:100%;width:40%;background:var(--acc);animation:ind 1s linear infinite}@keyframes ind{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+.next{margin:18px 0}.next h3{font-size:1rem;margin:0 0 10px;color:var(--mute)}.chips3{display:flex;gap:8px;flex-wrap:wrap}
+.chips3 a,.chips3 button{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;color:var(--ink);text-decoration:none;font:inherit;font-weight:600;font-size:.9rem;cursor:pointer}
+.chips3 i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c,#888) 28%,var(--ring))}
