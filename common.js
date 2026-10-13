@@ -27,3 +27,13 @@ async function pageCanvas(d,n,sc){const p=await d.getPage(n),v=p.getViewport({sc
 async function aesKey(pw,salt){const m=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 
 {const _c=HTMLAnchorElement.prototype.click;HTMLAnchorElement.prototype.click=function(){if(!this.isConnected){this.style.display='none';document.body.appendChild(this);_c.call(this);setTimeout(()=>this.remove(),1500)}else _c.call(this)}}
+(function(){
+const H=document.querySelector('header'),P=document.querySelector('.panel');
+if(H&&P&&H.querySelector('h1')){H.classList.add('bar2');const b=H.querySelector('.back');if(b){b.textContent='‹';b.setAttribute('aria-label','Back');if(b.getAttribute('href')==='index.html')b.href='tools.html'}const s=H.querySelector('.sub');if(s){s.className='hint';P.prepend(s)}}
+function forward(inp,files){const dt=new DataTransfer();[...files].forEach(f=>dt.items.add(f));inp.files=dt.files;inp.dispatchEvent(new Event('change',{bubbles:true}))}
+function sheet(inp){const o=document.createElement('div');o.className='sht';o.innerHTML='<div><button data-c="1">📷 Take photo</button><button data-c="0">🖼️ Choose from gallery</button><button data-c="x">Cancel</button></div>';
+o.onclick=e=>{const b=e.target.closest('button');if(e.target===o||(b&&b.dataset.c==='x')){o.remove();return}if(!b)return;const t=document.createElement('input');t.type='file';t.accept='image/*';if(inp.multiple)t.multiple=true;if(b.dataset.c==='1')t.setAttribute('capture','environment');t.onchange=()=>{if(t.files.length)forward(inp,t.files)};o.remove();t.click()};document.body.appendChild(o)}
+document.querySelectorAll('label.drop').forEach(l=>{const inp=l.querySelector('input[type=file]');if(!inp)return;
+l.addEventListener('click',e=>{if(e.target===inp||!/image/.test(inp.accept))return;e.preventDefault();sheet(inp)});
+inp.addEventListener('change',()=>{const n=inp.files.length;if(!n)return;l.classList.add('has');let s=l.querySelector('.fn');if(!s){s=document.createElement('span');s.className='fn';l.appendChild(s)}s.textContent=n>1?n+' files selected':inp.files[0].name})})
+})();
